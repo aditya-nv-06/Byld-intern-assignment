@@ -5,9 +5,31 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+enum RISK{
+  LOW
+  MODERATE
+  AGRESSIVE
+}
+
+model Portfolio{
+  id String @id @default(uuid())
+  portfolio_name String
+  portfolio_risk RISK
+  portfolio_hold Holdings[]
+}
+
+model Holdings{
+  id String @id @default(uuid())
+  holding_name String @unique
+  holding_units Int
+  holding_value BigInt
+  portfolioUser Portfolio @relation(fields: [portfolioId],references: [id])
+  portfolioId String
 }

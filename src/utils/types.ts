@@ -9,5 +9,4 @@ export interface ApiResponse{
 export interface init_portfolio{
     name: string;
     riskprofile: string;
-    balance:number;
 }

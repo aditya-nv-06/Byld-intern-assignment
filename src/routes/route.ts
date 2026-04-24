@@ -3,7 +3,7 @@ import { start_portfolio } from "../controllers/portfolio";
 
 const api_router = Router();
 
-api_router.get("/v1/portfolio",start_portfolio);
+api_router.post("/v1/portfolio",start_portfolio);
 
 export {
     api_router
