@@ -24,3 +24,5 @@ coverage/
 .vscode/
 .idea/
 .DS_Store
+
+/generated/prisma
