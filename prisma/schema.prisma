@@ -23,6 +23,19 @@ enum TRANSACTION_TYPE {
   SELL
 }
 
+enum EXCHANGE {
+  NSE
+  BSE
+}
+
+enum ASSET_CATEGORY {
+  ETF
+  MTF
+  BONDS
+  SHARES
+  STOCKS
+}
+
 model Portfolio{
   id String @id @default(uuid())
   portfolio_name String
@@ -36,10 +49,12 @@ model Holdings{
   holding_name String
   holding_units Int
   holding_value BigInt
+  exchange EXCHANGE
+  asset_category ASSET_CATEGORY
   portfolioUser Portfolio @relation(fields: [portfolioId],references: [id])
   portfolioId String
 
-  @@unique([portfolioId, holding_name])
+  @@unique([portfolioId, holding_name, exchange, asset_category])
 }
 
 model Transaction {
@@ -48,6 +63,8 @@ model Transaction {
   quantity Int
   price BigInt
   type TRANSACTION_TYPE
+  exchange EXCHANGE
+  asset_category ASSET_CATEGORY
   createdAt DateTime @default(now())
   portfolio Portfolio @relation(fields: [portfolioId], references: [id])
   portfolioId String
