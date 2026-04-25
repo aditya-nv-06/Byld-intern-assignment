@@ -1,23 +1,27 @@
-import express , {Router} from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import pino from 'pino-http'
-import { api_router } from './routes/route';
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import { api_router } from "./routes/route";
+import { swaggerSpec } from "./docs/swagger";
+import { buildLogger } from "./config/logger";
+
+dotenv.config();
 
 const server = express();
-const route_final = Router();
+const port = Number(process.env.PORT) || 3000;
 
-dotenv.config()
+server.use(express.json());
+server.use(cors());
+server.use(buildLogger());
 
-server.use(express.json())
+server.get("/api-docs.json", (_, res) => {
+    return res.json(swaggerSpec);
+});
 
-server.use(cors())
-server.use(pino());
+server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+server.use(api_router);
 
-route_final.use(api_router)
-
-server.use(route_final);
-
-server.listen(process.env.PORT||3000,()=>{
-    console.log(`Server running in :${process.env.PORT}`)
-})
+server.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
