@@ -14,7 +14,7 @@ server.use(express.json())
 server.use(cors())
 server.use(pino());
 
-route_final.use("/api",api_router)
+route_final.use(api_router)
 
 server.use(route_final);
 

@@ -1,12 +1,18 @@
-export interface ApiResponse{
+export interface ApiResponse<T = unknown>{
     success: boolean;
     message: string;
-    data?:unknown;
-    err?:unknown
+    data?: T;
+    err?: unknown
 }
 
 
-export interface init_portfolio{
-    name: string;
-    riskprofile: string;
+export interface InitPortfolioBody{
+    clientName: string;
+    riskProfile: string;
+}
+
+export interface PortfolioTransactionBody {
+    symbol: string;
+    quantity: number;
+    price: number;
 }
