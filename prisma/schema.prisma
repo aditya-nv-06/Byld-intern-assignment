@@ -36,12 +36,23 @@ enum ASSET_CATEGORY {
   STOCKS
 }
 
+enum ALERT_KIND {
+  ABOVE
+  BELOW
+}
+
+enum ALERT_STATUS {
+  ACTIVE
+  INACTIVE
+}
+
 model Portfolio{
   id String @id @default(uuid())
   portfolio_name String
   portfolio_risk RISK
   portfolio_hold Holdings[]
   transactions Transaction[]
+  alerts PriceAlert[]
 }
 
 model Holdings{
@@ -65,6 +76,19 @@ model Transaction {
   type TRANSACTION_TYPE
   exchange EXCHANGE
   asset_category ASSET_CATEGORY
+  createdAt DateTime @default(now())
+  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
+  portfolioId String
+}
+
+model PriceAlert {
+  id String @id @default(uuid())
+  symbol String
+  kind ALERT_KIND
+  targetPrice BigInt
+  webhookUrl String
+  status ALERT_STATUS @default(ACTIVE)
+  firedAt DateTime?
   createdAt DateTime @default(now())
   portfolio Portfolio @relation(fields: [portfolioId], references: [id])
   portfolioId String
