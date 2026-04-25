@@ -25,4 +25,4 @@ coverage/
 .idea/
 .DS_Store
 
-/generated/prisma
+src/generated

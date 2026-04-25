@@ -15,7 +15,12 @@ datasource db {
 enum RISK{
   LOW
   MODERATE
-  AGRESSIVE
+  AGGRESSIVE
+}
+
+enum TRANSACTION_TYPE {
+  BUY
+  SELL
 }
 
 model Portfolio{
@@ -23,13 +28,27 @@ model Portfolio{
   portfolio_name String
   portfolio_risk RISK
   portfolio_hold Holdings[]
+  transactions Transaction[]
 }
 
 model Holdings{
   id String @id @default(uuid())
-  holding_name String @unique
+  holding_name String
   holding_units Int
   holding_value BigInt
   portfolioUser Portfolio @relation(fields: [portfolioId],references: [id])
+  portfolioId String
+
+  @@unique([portfolioId, holding_name])
+}
+
+model Transaction {
+  id String @id @default(uuid())
+  symbol String
+  quantity Int
+  price BigInt
+  type TRANSACTION_TYPE
+  createdAt DateTime @default(now())
+  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
   portfolioId String
 }
