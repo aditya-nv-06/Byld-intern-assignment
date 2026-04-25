@@ -59,3 +59,38 @@
 - **Validation:**
   - `npm run dev` ran successfully
 - **Code Changes:** Updated TypeScript runtime configuration only
+
+### 5. Add Swagger, Docker, and Indian Market Categories
+
+**User Request:**
+> implement swagger for this backend and add the backend as a docker image with all the neccessary requirements in the dockerfile and add that to the docker-compose
+
+**Follow-up Request:**
+> use nse and bse use indian stock market as an example add the categories like etf,mtf,bonds,shares and stocks for buy and sell holdings.make sure to add comments just to know what a function does.
+
+**Changes Made:**
+- **Files Modified:**
+  - `src/index.ts`
+  - `src/docs/swagger.ts`
+  - `src/controllers/portfolio/shared.ts`
+  - `src/controllers/portfolio/buy.controller.ts`
+  - `src/controllers/portfolio/sell.controller.ts`
+  - `src/controllers/portfolio/holdings.controller.ts`
+  - `src/controllers/portfolio/portfolio.controller.ts`
+  - `prisma/schema.prisma`
+  - `prisma/migrations/20260425050814_add_exchange_and_asset_categories/migration.sql`
+  - `docker-compose.yml`
+  - `README.md`
+  - `package.json`
+- **Swagger:** Added `/api-docs` and `/api-docs.json` with OpenAPI examples for Indian stock market flows using NSE/BSE and categories like ETF, MTF, BONDS, SHARES, and STOCKS.
+- **Controllers:** Updated buy, sell, and holdings flows to accept and return `exchange` and `assetCategory` values.
+- **Prisma Schema:** Added `EXCHANGE` and `ASSET_CATEGORY` enums and stored them on `Holdings` and `Transaction`.
+- **Database Migration:** Created and applied a migration for the new enums, columns, and holdings unique key.
+- **Docker:** Added a backend Dockerfile, `.dockerignore`, and a compose service for the API alongside Postgres.
+- **Documentation:** Added brief usage notes for Swagger and Docker in the README.
+- **Comments:** Added short function comments in the controller flow where helpful.
+- **Validation:**
+  - `npm run build` passed
+  - `docker compose config` passed
+  - `docker build -t byld-server .` passed
+- **Note:** Prisma migrate initially detected drift in the local dev database, so the database was reset and the migration was re-applied before generating the client.
