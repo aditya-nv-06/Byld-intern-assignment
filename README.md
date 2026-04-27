@@ -46,8 +46,6 @@ docker compose up -d --build
 npm run test
 ```
 
----
-
 ## � Full Documentation
 
 ### Getting Started
