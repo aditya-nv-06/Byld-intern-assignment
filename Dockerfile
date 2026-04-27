@@ -10,6 +10,7 @@ FROM node:24-alpine AS build
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
+COPY package*.json ./
 COPY tsconfig.json ./
 COPY prisma.config.ts ./
 COPY prisma ./prisma
