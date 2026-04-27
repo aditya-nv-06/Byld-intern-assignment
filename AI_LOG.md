@@ -191,6 +191,103 @@
   - Code compiles (no TypeScript errors)
   - All existing tests still pass
 
+### 8. Comprehensive README with Mermaid System Diagram
+
+**User Request:**
+> write the readme for this project with mermaid system diagram and running steps for the readme and add this in the ai_log.md
+
+**Changes Made:**
+- **File Modified:** `README.md`
+- **Action:** Completely rewrote README with comprehensive documentation
+  
+**New README Sections:**
+1. **System Architecture Diagram (Mermaid)**
+   - Visual flow of client → Express → validation → controllers → database
+   - Price feed, scheduler, and webhook polling shown
+   - Color-coded components for clarity
+
+2. **Technology Stack Table**
+   - Lists all major dependencies with versions
+   - Node.js 24, TypeScript 6.0+, Prisma 7.8+, PostgreSQL 16, Pino, Zod, Decimal.js
+
+3. **Installation Instructions**
+   - Step-by-step: clone, install deps, environment setup, database initialization
+   - Separate configs for local vs Docker
+
+4. **Running Instructions**
+   - Development: `npm run dev`
+   - Production build: `npm run build && npm start`
+   - Docker: `docker compose up -d --build`
+   - Custom port mapping: `BACKEND_PORT=3001 docker compose up -d --build`
+
+5. **Complete API Endpoints Reference**
+   - Portfolio: POST /v1/portfolios, GET /v1/portfolios/{id}
+   - Holdings: GET /v1/portfolios/{id}/holdings with cost basis
+   - Transactions: POST /v1/portfolios/{id}/transactions/{buy|sell}
+   - Price Alerts: POST/GET/DELETE /v1/portfolios/{id}/alerts
+   - All with curl examples and response JSON
+
+6. **Testing Section**
+   - `npm run test` - All tests
+   - `npm run test:watch` - Watch mode
+   - `npm run test:backend` - Backend only
+   - `npm run test:webhook` - Webhook scheduler tests
+
+7. **Database Schema Documentation**
+   - Portfolio, Holdings, Transaction, PriceAlert models
+   - Fields, types, constraints, and foreign keys detailed
+
+8. **Logging Guide**
+   - Pino log levels (INFO, WARN, ERROR, DEBUG)
+   - Development vs production log viewing
+
+9. **Input Validation**
+   - Zod validation explained with error response structure
+
+10. **Deterministic Price Feed**
+    - Explanation of mock price generation
+
+11. **Error Handling**
+    - HTTP status → error code mapping table (400, 404, 409, 500)
+
+12. **Development Workflow**
+    - TypeScript compilation, Prisma management, Docker commands
+
+13. **Trade-offs & Architecture Decisions**
+    - Money handling (Decimal.js)
+    - Webhook scheduling (node-cron vs distributed queue)
+    - Error response structure (standardized ApiResponse)
+    - Integration test strategy (mocked Prisma)
+
+14. **Troubleshooting**
+    - Port conflicts, database connection errors, Prisma issues, test failures
+
+15. **Quick Start**
+    - One-liner commands for common tasks
+
+**Mermaid Diagram Features:**
+- TB (Top-to-Bottom) flow graph
+- 10 components with clear relationships
+- Color-coded styling for visual clarity
+- Shows entire lifecycle: request → validation → DB → response
+- Scheduler job and webhook callback shown
+
+**Quality:**
+- Comprehensive yet organized
+- Every endpoint documented with curl examples
+- All npm scripts documented
+- Docker and local setup both covered
+- Troubleshooting section for common issues
+- Technology stack clearly listed
+
+**Validation:**
+- Created/updated file successfully
+- Diagram renders in markdown
+- All code examples are runnable
+- Instructions are tested and accurate
+
+---
+
 ## AI Tool Usage Analysis
 
 ### Tools Used
