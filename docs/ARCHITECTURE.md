@@ -26,7 +26,7 @@ graph TB
     Scheduler -->|Get Prices| PriceFeed
     Scheduler -->|POST Alert Fired| Webhook
     Express -->|Serve| Swagger
-    Database -.-->|Prisma Client| Controllers
+      Database -.->|Prisma Client| Controllers
 
     style Express fill:#4a90e2
     style Database fill:#50c878
