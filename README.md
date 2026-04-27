@@ -448,54 +448,6 @@ npx prisma generate
 
 ## Development
 
-### Folder Structure
-
-```
-server/
-├── src/
-│   ├── app.ts                    # Express app setup
-│   ├── index.ts                  # Server entry point
-│   ├── controllers/
-│   │   ├── alerts.controller.ts  # Price alert logic
-│   │   └── portfolio/
-│   │       ├── buy.controller.ts
-│   │       ├── sell.controller.ts
-│   │       ├── holdings.controller.ts
-│   │       ├── portfolio.controller.ts
-│   │       └── shared.ts
-│   ├── routes/
-│   │   └── route.ts              # API route definitions
-│   ├── jobs/
-│   │   └── webhookScheduler.ts   # 30s alert scheduler
-│   ├── utils/
-│   │   ├── money.ts              # Decimal.js money math
-│   │   ├── http.ts               # Response formatting
-│   │   ├── priceFeed.ts          # Mock price generator
-│   │   └── types.ts              # TypeScript types
-│   ├── config/
-│   │   └── logger.ts             # Pino logger setup
-│   ├── constants/
-│   │   └── messages.ts           # Centralized messages
-│   ├── database/
-│   │   └── primaClient.ts        # Prisma Client export
-│   └── docs/
-│       └── swagger.ts            # Swagger/OpenAPI docs
-├── prisma/
-│   ├── schema.prisma             # Database schema
-│   └── migrations/               # Migration files
-├── tests/
-│   ├── backend/                  # Route tests
-│   ├── integration/              # Full flow tests
-│   ├── unit/                     # Utils tests
-│   └── webhook/                  # Scheduler tests
-├── dist/                         # Compiled JS (build output)
-├── README.md                     # This file
-├── package.json
-├── tsconfig.json
-├── docker-compose.yml
-└── Dockerfile
-```
-
 ### Build & Compile
 
 ```bash
@@ -614,28 +566,11 @@ docker compose up -d --build
 
 ---
 
-## Contributing
-
-1. Create feature branch: `git checkout -b feature/your-feature`
-2. Make changes and test: `npm run test`
-3. Build: `npm run build`
-4. Run quality gates: `npm run build && npm run test && docker compose config`
-5. Commit with clear messages
-6. Push and create pull request
-
----
-
-## License
-
-ISC (See LICENSE file)
-
----
-
 ## Contact
 
 **Author**: Aditya N V  
 **Email**: adityanv4@gmail.com
 
----
+
 
 
