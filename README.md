@@ -37,7 +37,7 @@ npm install && npm run dev
 
 ### Docker Production
 ```bash
-docker compose up -d --build
+make up
 ```
 **Access**: API at `http://localhost:3000` | Database: `localhost:5433`
 
@@ -86,11 +86,12 @@ npm run test
 
 | Command | Purpose |
 |---------|---------|
-| `docker compose up -d --build` | Start all services |
+| `make up` | Build the Docker image and start all services |
+| `make build` | Build the backend image only |
 | `docker compose ps` | Check service status |
 | `docker compose logs -f backend` | View backend logs |
 | `docker compose down` | Stop all services |
-| `BACKEND_PORT=3001 docker compose up -d --build` | Custom port |
+| `BACKEND_PORT=3001 make up` | Custom port |
 
 ---
 
@@ -239,7 +240,7 @@ npm install && npm run dev
 
 **Or with Docker:**
 ```bash
-docker compose up -d --build
+make up
 # http://localhost:3000
 ```
 
@@ -280,7 +281,7 @@ npm start
 
 ```bash
 # Start backend + PostgreSQL
-docker compose up -d --build
+make up
 
 # Check services
 docker compose ps
@@ -299,7 +300,7 @@ db          | healthy
 
 ```bash
 # Use custom port
-BACKEND_PORT=3001 docker compose up -d --build
+BACKEND_PORT=3001 make up
 # API available at http://localhost:3001
 
 # Stop all services
@@ -528,7 +529,7 @@ docker compose config
 
 # Rebuild from scratch
 docker compose down -v
-docker compose up -d --build
+make up
 ```
 
 ### Webhook Not Firing
